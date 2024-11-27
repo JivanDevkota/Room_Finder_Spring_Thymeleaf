@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{home::layout(~{::section})}">
+<head th:replace="~{header :: head}"></head>
+<style>
+
+</style>
+<body>
+<section>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Uses List</h2>
+            <table class="table table-bordered table-responsive" style="margin: auto; text-align: center;" >
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Email Address</th>
+                        <th scope="col">Phone Number</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="user: ${users}">
+                        <td th:text="${user.id}">UserId</td>
+                        <td th:text="${user.username}">UserId</td>
+                        <td th:text="${user.email}">UserId</td>
+                        <td th:text="${user.phoneNumber}">UserId</td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+</section>
+</body>
+<html>

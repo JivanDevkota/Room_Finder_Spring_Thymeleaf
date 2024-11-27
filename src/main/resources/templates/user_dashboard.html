@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head th:replace="~{header :: head}"></head>
+<style>
+
+</style>
+<body>
+<div class="container mt-5">
+    <h3 class="mb-3">Hello, welcome to the User Dashboard</h3>
+        <p class="lead">Logged in as: <span th:text="${username}">Admin Name</span></p>
+</div>
+<a th:href="@{/logout}">Logout</a>
+
+</body>
+<html>

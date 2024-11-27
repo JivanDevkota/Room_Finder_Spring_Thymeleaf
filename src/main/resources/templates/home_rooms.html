@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{home::layout(~{::section})}">
+<head th:replace="~{header :: head}"></head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<section>
+    <div class="container mt-5">
+<!--        <h2 class="text-center mb-4">Available Rooms</h2>-->
+       <div class="row mb-4">
+        <div class="col-md-8 offset-md-2">
+            <form th:action="@{/users/room/search}" method="get" class="d-flex">
+                <input type="text" name="query" class="form-control me-2" placeholder="Search by room name or type" style="flex: 2;"/>
+                <input type="number" name="minPrice" class="form-control me-2" placeholder="Min Price" style="max-width: 120px;"/>
+                <input type="number" name="maxPrice" class="form-control me-2" placeholder="Max Price" style="max-width: 120px;"/>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+    </div>
+        <div class="row">
+            <!-- Display each room as a card, 5 per row -->
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4" th:each="room : ${rooms}">
+                <div class="card h-100 shadow-lg border-0 text-center">
+                    <img th:src="@{${room.image1}}" alt="Room Image" class="card-img-top" style="height: 300px; object-fit: cover;">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <h5 class="card-title" th:text="${room.name}">Room Name</h5>
+                        <p class="card-text mb-1" th:text="${room.description}" style="max-height: 60px; overflow: hidden;">Room Description</p>
+                        <p class="card-text"><strong>Price:</strong> $<span th:text="${room.price}">0</span></p>
+                        <p class="card-text"><strong>Type:</strong> <span th:text="${room.type}">Type</span></p>
+                        <p class="card-text"><strong>Location:</strong> <span th:text="${room.location}">Location</span></p>
+                        <div class="mt-3 d-flex justify-content-center">
+<!--                            <form th:action="@{/users/book}" method="post">-->
+<!--                                <input type="hidden" name="roomId" th:value="${room.id}"/>-->
+<!--                                <input type="hidden" name="userId" th:value="${#authentication.principal.id}"/>-->
+<!--                                <label>Start Date: <input type="date" name="startDate" required/></label>-->
+<!--                                <label>End Date: <input type="date" name="endDate" required/></label>-->
+<!--                                <button type="submit" class="btn btn-success btn-sm" style="margin-right: 10px">Book Rent</button>-->
+<!--&lt;!&ndash;                            <a href="#" class="btn btn-success btn-sm mr-3" style="margin-right: 10px">Booked Room</a>&ndash;&gt;-->
+<!--                            </form>-->
+                            <a href="#" class="btn btn-success btn-sm mr-3"
+                               th:href="@{/users/booking/{roomId}(roomId=${room.id})}"
+                               style="margin-right: 10px">Book Room</a>
+                            <a href="#" class="btn btn-primary btn-sm">View Details</a>
+                        </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-4">
+        <div class="row mb-3">
+            <div class="col-md-12 d-flex justify-content-end">
+                <a th:href="@{/paginated/rooms(page=${currentPage}, size=${pageSize}, sortField='name', sortDirection=${reverseSortDirection})}"
+                   class="btn btn-link">Sort by Name</a>
+                <a th:href="@{/paginated/rooms(page=${currentPage}, size=${pageSize}, sortField='price', sortDirection=${reverseSortDirection})}"
+                   class="btn btn-link">Sort by Price</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Existing pagination controls -->
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                            <a class="page-link" th:href="@{/paginated/rooms(page=${currentPage - 1}, size=${pageSize}, sortField=${sortField}, sortDirection=${sortDirection})}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo; Previous</span>
+                            </a>
+                        </li>
+                        <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}" th:classappend="${i == currentPage} ? 'active'">
+                            <a class="page-link" th:href="@{/paginated/rooms(page=${i}, size=${pageSize}, sortField=${sortField}, sortDirection=${sortDirection})}" th:text="${i + 1}"></a>
+                        </li>
+                        <li class="page-item" th:classappend="${currentPage + 1 == totalPages} ? 'disabled'">
+                            <a class="page-link" th:href="@{/paginated/rooms(page=${currentPage + 1}, size=${pageSize}, sortField=${sortField}, sortDirection=${sortDirection})}" aria-label="Next">
+                                <span aria-hidden="true">Next &raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+</body>
+</html>

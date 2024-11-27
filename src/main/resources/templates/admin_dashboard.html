@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{home::layout(~{::section})}">
+<head th:replace="~{header :: head}"></head>
+<style>
+
+</style>
+<body>
+<section>
+    <div class="container p-5">
+        <p class="text-center fs-3 mt-4">Admin Dashboard</p>
+        <div class="row p-5">
+            <div class="col-md-4 mt-2">
+                <a th:href="@{/admin/rooms/new}" class="text-decoration-none">
+                    <div class="card card-sh">
+                        <div class="card-body text-center text-primary">
+                            <i class="bi bi-plus-square fs-3 "></i>
+                            <h4>Add Rooms</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 mt-2">
+                <a th:href="@{/admin/room/lists}" class="text-decoration-none">
+                    <div class="card card-sh">
+                        <div class="card-body text-center text-warning">
+                            <i class="bi bi-list-task fs-3 "></i>
+                            <h4>Room Lists</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 mt-2">
+                <a th:href="@{/admin/get/all/users}" class="text-decoration-none">
+                    <div class="card card-sh">
+                        <div class="card-body text-center text-success">
+                            <i class="bi bi-book fs-3"></i>
+                            <h4>View Users</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 mt-4">
+                <a href="#" class="text-decoration-none">
+                    <div class="card card-sh">
+                        <div class="card-body text-center text-warning">
+                            <i class="bi bi-box2-fill fs-3"></i>
+                            <h4>Orders</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 mt-4">
+                <a href="#" class="text-decoration-none">
+                    <div class="card card-sh">
+                        <div class="card-body text-center text-primary">
+                            <i class="bi bi-person-circle fs-3"></i>
+                            <h4>Users</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 mt-4">
+                <a href="#" class="text-decoration-none">
+                    <div class="card card-sh">
+                        <div class="card-body text-center text-primary">
+                            <i class="bi bi-person-plus-fill fs-3"></i>
+                            <h4>Add Admin</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<a th:href="@{/logout}">Logout</a>
+
+
+
+<!--        <div class="d-flex flex-column flex-md-row align-items-md-center">-->
+<!--            <span th:text="${username}"class="btn btn-light shadow-sm d-flex align-items-center fs-5">Admin Name</span>-->
+<!--        </div>-->
+</body>
+<html>

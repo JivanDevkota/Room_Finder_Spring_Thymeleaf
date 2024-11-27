@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      >
+<!--th:replace="~{home::layout(~{::section})}"-->
+<head th:replace="~{header :: head}"></head>
+<meta charset="UTF-8">
+<title>Book Room</title>
+</head>
+<body>
+<section>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Book Room</h2>
+        <form th:action="@{/users/book}" method="post">
+            <!-- Hidden Fields for Room ID and User ID -->
+            <input type="hidden" name="roomId" th:value="${room.id}"/>
+            <input type="hidden" name="userId" th:value="${#authentication.principal.id}"/>
+
+            <div class="form-group">
+                <label for="startDate">Start Date:</label>
+                <input type="date" name="startDate" id="startDate" class="form-control" required/>
+            </div>
+
+            <div class="form-group">
+                <label for="endDate">End Date:</label>
+                <input type="date" name="endDate" id="endDate" class="form-control" required/>
+            </div>
+
+            <button type="submit" class="btn btn-success btn-block">Confirm Booking</button>
+        </form>
+    </div>
+</section>
+</body>
+</html>

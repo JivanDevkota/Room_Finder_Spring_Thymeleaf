@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:fragment="layout(content)"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head th:replace="~{header :: head}"></head>
+
+<style>
+    div,a{
+        font-size: 17px;
+    }
+</style>
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-primary shadow-lg py-3">
+        <div class="container-fluid">
+            <a class="navbar-brand text-light text-uppercase fw-bold fs-3" href="#">RoomFinder</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item me-3">
+                        <a class="nav-link active text-light fs-5" aria-current="page" th:href="@{/all/rooms}">Home</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link text-light fs-5" th:href="@{/paginated/rooms}">Available Room/Flats</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link text-light fs-5" href="#">Post Your Room</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link text-light fs-5" href="#">By Pricing</a>
+                    </li>
+                    <li class="nav-item" >
+                        <a class="nav-link text-light fs-5" href="#">Our Service</a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"  sec:authorize="!isAuthenticated()">
+                        <a class="nav-link active text-light" aria-current="page"
+                           th:href="@{/users/login}"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+                    </li>
+                    <li class="nav-item"  sec:authorize="!isAuthenticated()">
+                        <a class="nav-link active text-light" aria-current="page"
+                           th:href="@{/users/register}">Register</a>
+                    </li>
+                    <li class="nav-item d-flex">
+                        <i class="bi bi-person-plus-fill fs-3 text-light"></i>
+                        <a class="nav-link active text-light fs-5" aria-current="page"
+                           th:text="${username}">User</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<!--    <a th:href="@{/logout}">Logout</a>-->
+<!--    <div class="container-fluid p-1 bg-primary text-center text-white">-->
+<!--        <p>Ecom.com</p>-->
+<!--    </div>-->
+    <div th:replace="${content}"></div>
+
+</body>
+<html>

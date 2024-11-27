@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{home::layout(~{::section})}">
+<head th:replace="~{header :: head}"></head>
+<meta charset="UTF-8">
+<title>Book Room</title>
+</head>
+<body>
+<section>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Search Results</h2>
+        <div class="row">
+            <!-- Display each room as a card, 5 per row -->
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4" th:each="room : ${rooms}">
+                <div class="card h-100 shadow-lg border-0 text-center">
+                    <img th:src="@{${room.image1}}" alt="Room Image" class="card-img-top" style="height: 300px; object-fit: cover;">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <h5 class="card-title" th:text="${room.name}">Room Name</h5>
+                        <p class="card-text mb-1" th:text="${room.description}" style="max-height: 60px; overflow: hidden;">Room Description</p>
+                        <p class="card-text"><strong>Price:</strong> $<span th:text="${room.price}">0</span></p>
+                        <p class="card-text"><strong>Type:</strong> <span th:text="${room.type}">Type</span></p>
+                        <p class="card-text"><strong>Location:</strong> <span th:text="${room.location}">Location</span></p>
+                        <div class="mt-3 d-flex justify-content-center">
+                            <a href="#" class="btn btn-success btn-sm mr-3"
+                               th:href="@{/users/booking/{roomId}(roomId=${room.id})}"
+                               style="margin-right: 10px">Book Room</a>
+                            <a href="#" class="btn btn-primary btn-sm">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Display message if no rooms are found -->
+        <div th:if="${rooms.size() == 0}" class="text-center mt-5">
+            <h4>No rooms found for your search criteria.</h4>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

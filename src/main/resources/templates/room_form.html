@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{home::layout(~{::section})}">
+<head th:replace="~{header :: head}"></head>
+<style>
+
+</style>
+<body>
+<section>
+    <div class="container mt-5">
+        <div class="card shadow-sm p-4">
+            <h3 class="mb-4 text-center">Create Room</h3>
+
+            <form th:action="@{/admin/save}" th:object="${room}" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Enter room name" required />
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description:</label>
+                    <textarea th:field="*{description}" class="form-control" id="description" rows="3" placeholder="Enter room description" required></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location:</label>
+                    <input type="text" th:field="*{location}" class="form-control" id="location" placeholder="Enter room location" required />
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price:</label>
+                    <input type="text" th:field="*{price}" class="form-control" id="price" placeholder="Enter room Price" required />
+                </div>
+                <div class="mb-3">
+                    <label for="type" class="form-label">Type:</label>
+                    <input type="text" th:field="*{type}" class="form-control" id="type" placeholder="Enter room type" required />
+                </div>
+
+                <div class="mb-3">
+                    <label for="file" class="form-label">Image 1:</label>
+                    <input type="file" name="file" class="form-control" id="file" accept="image/*" required />
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Save Room</button>
+                </div>
+            </form>
+
+            <div class="mt-4 text-center">
+                <a th:href="@{/rooms}" class="btn btn-link">Back to Room List</a>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+<html>

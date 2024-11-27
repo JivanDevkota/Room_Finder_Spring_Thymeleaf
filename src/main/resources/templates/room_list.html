@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{home::layout(~{::section})}">
+<head th:replace="~{header :: head}"></head>
+<body>
+<section>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Available Rooms</h2>
+
+        <!-- Table for displaying rooms -->
+        <table class="table table-bordered table-responsive" style="margin: auto; vertical-align: middle; text-align: center">
+            <thead>
+            <tr>
+                <th scope="col">Room Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price</th>
+                <th scope="col">Type</th>
+                <th scope="col">Location</th>
+                <th scope="col">Image</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="room : ${rooms}">
+                <td th:text="${room.name}">Room Name</td>
+                <td th:text="${room.description}">Room Description</td>
+                <td th:text="${room.price}">Room Price</td>
+                <td th:text="${room.type}">Room Type</td>
+                <td th:text="${room.location}">Room Location</td>
+                <td>
+                    <img th:src="@{${room.image1}}" alt="Room Image" style="height: 100px; object-fit: cover;">
+                </td>
+                <td>
+                    <a th:href="@{'/room/' + ${room.id}}" class="btn btn-primary">View Details</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+</body>
+</html>
